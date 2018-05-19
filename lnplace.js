@@ -181,7 +181,7 @@ async function purchasePixel(invoice) {
       { upsert: true },
     );
 
-    colors[invoice.r_hash] = invoice.color;
+    colors[invoice.index] = invoice.color;
     sendEvent(`${invoice.index} ${invoice.color}`);
   } catch (err) {
     logger.error(err);
