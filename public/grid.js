@@ -9,7 +9,6 @@ function gridData() {
 	var width = 50;
 	var height = 50;
 	var click = 0;
-	var jscolor = "jscolor {width:243, height:150, position:'right'}";
 	
 	// iterate for rows	
 	for (var row = 0; row < 16; row++) {
