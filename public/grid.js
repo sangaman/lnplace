@@ -16,7 +16,7 @@ function gridData() {
     	//console.log(response);
     	rawData = response.colors;
 
-    	console.log(rawData.colors);
+    	console.log(rawData);
 
 		// iterate for rows	
 		for (var row = 0; row < 16; row++) {
@@ -30,7 +30,7 @@ function gridData() {
 					width: width,
 					height: height,
 					click: click,
-					color: rawData[column*row]
+					color: rawData[row*16+column]
 				})
 				// increment the x position. I.e. move it over by 50 (width variable)
 				xpos += width;
