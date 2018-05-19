@@ -57,10 +57,9 @@ const colors = Array(...Array(255)).map(() => '#FFFFFF');
 const invoices = {};
 
 /**
- * A map of invoice r_hashes to response objects for clients
- * listening for when those invoices are settled or terminated
+ * An array of clients listening to server side events
  */
-const listeners = {};
+const listeners = [];
 
 /**
  * Creates an index on r_hash for invoices if it doesn't exist.
@@ -107,14 +106,14 @@ app.get('/colors', (req, res) => {
   });
 });
 
-app.get('/listen/:r_hash', (req, res) => {
+app.get('/listen', (req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
     Connection: 'keep-alive',
   });
 
-  listeners[req.params.r_hash] = res;
+  listeners.push(res);
 });
 
 app.post('/invoice', urlencodedParser, (req, res) => {
