@@ -1,0 +1,8 @@
+p { font-size: 1.1em }
+
+/* Splash Page 001 */
+.splash-cover {
+	height: 100vh;
+	background-image: url('../images/race.jpg');
+	background-position: center; background-size: cover;
+}
