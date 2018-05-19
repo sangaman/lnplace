@@ -8,3 +8,11 @@
 	right: 0;
 	padding: 10px;
 }
+
+.square:hover{
+	fill: rgba(0,0,0,0.5) !important;
+}
+
+#grid svg{
+	cursor: pointer;
+}
