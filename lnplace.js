@@ -71,7 +71,7 @@ async function init() {
     _id: -1,
   }).toArray()
     .then(async (dbColors) => {
-      for (let n = 0; n < colors.length; n += 1) {
+      for (let n = 0; n < dbColors.length; n += 1) {
         const { _id, hex } = dbColors[n];
         colors[_id] = hex;
       }
