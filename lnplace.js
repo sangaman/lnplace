@@ -49,7 +49,7 @@ let db;
 /**
  * The current RGB values
  */
-const colors = Array(...Array(255)).map(() => '#FFFFFF');
+const colors = Array(...Array(256)).map(() => '#FFFFFF');
 
 /**
  * The pending invoices
