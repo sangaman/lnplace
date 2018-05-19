@@ -3,7 +3,7 @@
 // gridData
 // create a new grid with colors from the server
 // void -> d3 data object
-function gridData() {
+function refreshGrid() {
 	var rawData;
 	var data = new Array();
 	var xpos = 1; //starting xpos and ypos at 1 so the stroke will show when we make the grid below
@@ -50,6 +50,8 @@ function gridData() {
 function setGrid(gridData) {
 	// I like to log the data to the console for quick debugging
 	console.log(gridData);
+
+	d3.select("#grid svg").remove();
 
 	var grid = d3.select("#grid")
 		.append("svg")
@@ -98,12 +100,19 @@ function setGrid(gridData) {
    			d3.select("#row").text(row);
    			d3.select("#col").text(col);
       
-	    });
+		});
+		
+		if(selectedCell != null){
+			var prevSquare = grid.selectAll(".square").filter(function(d2,i){
+			   return i == selectedCell;
+		   });
+		   prevSquare.style('fill',$("#colorPicker .colorpicker_hex input").val());
+		}
 }
 
 $('#colorPicker').ColorPicker({flat: true});
 
-gridData();
+refreshGrid();
 
 var selectedCell = null;
 function getInvoice() {
@@ -126,3 +135,12 @@ function getInvoice() {
         }
     );
 }
+
+const event_source = new EventSource('/listen');
+event_source.onmessage = function (e) {
+	refreshGrid();
+}
+
+window.setInterval(function(){
+	refreshGrid();
+  }, 2000);
