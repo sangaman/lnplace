@@ -1,7 +1,10 @@
 .colorPicker {
-  height:200px;
-  width:645px;
-  margin:auto;
-  margin-top:200px;
-  position:relative;
+  	margin:0px;
+}
+
+#invoice{
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px;
 }

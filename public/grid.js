@@ -39,6 +39,7 @@ function gridData() {
 			xpos = 1;
 			// increment the y position for the next row. Move it down 50 (height variable)
 			ypos += height;	
+
 		}
 		setGrid(data);
 	});
@@ -71,7 +72,42 @@ function setGrid(gridData) {
 		.on('click', function(d) {
 	       d.click = !d.click
 	       console.log(arguments)
+
+	       	selected.x = d.x;
+       		selected.y = d.y;
+       		d3.select("#row").text(row);
+       		d3.select("#col").text(col);
 	    });
+
+	grid.on('blur',function(){
+
+		var square = grid.selectAll(".square").filter(function(d){
+	  		return selected.x && selected.y && selected.x == d.x && selected.y == d.y;
+	  	});
+	  	square.style('fill',function(d){
+	  		return d.color;
+	  	});
+
+		selected = {};
+		d3.select("#row").text('--');
+	    d3.select("#col").text('--');
+	});
+
 }
 
 gridData();
+
+var selected = {};
+
+var copi = cp.colorpicker();
+d3.select('.colorPicker svg')
+  	.datum(cp.colorSystems.hsla)
+  	.call(copi)
+
+copi.dispatch.on('cpupdate', function(d) {
+  	var currentColor = cp.converters.dataToHslaString(d);
+  	var square = grid.selectAll(".square").filter(function(d){
+  		return selected.x && selected.y && selected.x == d.x && selected.y == d.y;
+  	});
+  	square.style('fill',currentColor);
+});
