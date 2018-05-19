@@ -125,9 +125,7 @@ app.post('/invoice', urlencodedParser, (req, res) => {
     // valid so far, check for and validate payment request
     let responseBody;
     addInvoice().then((response) => {
-      const rHash = response.r_hash.toString('hex');
       responseBody = {
-        r_hash: rHash,
         payment_request: response.payment_request,
       };
 
