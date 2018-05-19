@@ -154,12 +154,12 @@ app.post('/invoice', urlencodedParser, (req, res) => {
  * Send an event
  * @param event - The event type to send
  */
-function sendEvent(event) {
+function sendEvent(message) {
   for (let n = 0; n < listeners.length; n += 1) {
     const listener = listeners[n];
     if (listener && !listener.finished) {
       try {
-        listener.write(`data: ${event}\n\n`);
+        listener.write(`data: ${message}\n\n`);
       } catch (err) {
         listeners[n] = undefined;
         logger.error(err);
@@ -182,7 +182,7 @@ async function purchasePixel(invoice) {
     );
 
     colors[invoice.r_hash] = invoice.color;
-    sendEvent(`${invoice.r_hash} ${invoice.color}`);
+    sendEvent(`${invoice.index} ${invoice.color}`);
   } catch (err) {
     logger.error(err);
   }
