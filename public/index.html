@@ -8,10 +8,8 @@
 	<script type="text/javascript" src="js/colorpicker.js"></script>
 	<script type="text/javascript" src="js/eye.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
-	<script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/colorpicker.css">
-	<link rel="stylesheet" type="text/css" href="css/layout.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -27,25 +25,23 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-4 col-md-3 col-lg-2">
+		<div class="col-sm-12 col-md-3 col-lg-2">
 				<div class="thumbnail">
 					<div class="ordered-list">
 						Instructions
 					</div>
 					<ol class="ordered-list">
-						<li>1. Pick a Grid</li>
-						<li>2. Choose your Color</li>
-						<li>3. Purchase using QR Code</li>
-						<li>4. Have fun!</li>
+						<li>Pick a Grid</li>
+						<li>Choose your Color</li>
+						<li>Purchase using QR Code</li>
+						<li>Have fun!</li>
 					</ol>
 				</div>
 		</div>
-		<div class="col-sm-9 col-md-6 col-lg-6">
-			<div class="jumbotron">
-				<div id="grid"></div>
-			</div>
+		<div class="col-sm-12 col-md-9 col-lg-6">
+			<div id="grid"></div>
 		</div>
-		<div class="col-sm-3 col-md-4 col-lg-4">
+		<div class="col-sm-12 col-md-12 col-lg-4">
 			<div id="invoice">
 				<p> Purchase cell at (<span id="row">--</span>, <span id="col">--</span>)
 				</p>
@@ -53,7 +49,8 @@
 				<br /><br />
 				<button onclick="getInvoice()">Purchase</button>
 				<br /><br />
-				<img id="qr"></img>
+                <img id="qr"></img>
+                <textarea id="payreq" readonly></textarea>
 			</div>
 		</div>
 

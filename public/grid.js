@@ -132,6 +132,7 @@ function getInvoice() {
 				value: data.payment_request,
 				size: 250
 			});
+			d3.select("#payreq").text(data.payment_request);
         }
     );
 }
