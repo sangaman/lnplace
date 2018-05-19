@@ -12,8 +12,8 @@ function gridData() {
 	var click = 0;
 
 	// make get request for colors
-	//var url = "http://ln.raceplace.org/colors";
-	var url = "test.json";
+	var url = "http://ln.raceplace.org/colors";
+	//var url = "test.json";
 	d3.json(url, function(error, response) {
     	//console.log(response);
     	rawData = response.colors;
