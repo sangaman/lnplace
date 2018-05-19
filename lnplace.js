@@ -33,10 +33,6 @@ const adminMacaroon = fs.readFileSync(`${LND_HOMEDIR}admin.macaroon`);
 const meta = new grpc.Metadata();
 meta.add('macaroon', adminMacaroon.toString('hex'));
 
-const urlencodedParser = bodyParser.urlencoded({
-  extended: true,
-});
-
 const { MongoClient } = require('mongodb');
 
 const dbUrl = 'mongodb://127.0.0.1:27017';
@@ -117,7 +113,7 @@ app.get('/listen/:r_hash', (req, res) => {
   listeners[req.params.r_hash] = res;
 });
 
-app.post('/invoice', urlencodedParser, (req, res) => {
+app.post('/invoice', bodyParser.json(), (req, res) => {
   logger.info(`invoice request: ${JSON.stringify(req.body)}`);
   if (!req.body.color || !req.body.index) {
     res.status(400).end();

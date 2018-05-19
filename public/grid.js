@@ -1,3 +1,4 @@
+/* eslint-disable */
 
 // gridData
 // create a new grid with colors from the server
@@ -12,8 +13,7 @@ function gridData() {
 	var click = 0;
 
 	// make get request for colors
-	//var url = "http://ln.raceplace.org/colors";
-	var url = "test.json";
+	var url = "http://ln.raceplace.org/colors";
 	d3.json(url, function(error, response) {
     	//console.log(response);
     	rawData = response.colors;
@@ -99,13 +99,6 @@ function setGrid(gridData) {
    			d3.select("#col").text(col);
       
 	    });
-
-	// grid.on('blur',function(){
-	// 	selected = {};
-	// 	d3.select("#row").text('--');
-	//     d3.select("#col").text('--');
-	// });
-
 }
 
 $('#colorPicker').ColorPicker({flat: true});
@@ -113,3 +106,23 @@ $('#colorPicker').ColorPicker({flat: true});
 gridData();
 
 var selectedCell = null;
+function getInvoice() {
+	const row = parseInt(d3.select("#row").text());
+	const col = parseInt(d3.select("#col").text());
+	const index = selectedCell;
+	const color = '#' + $("#colorPicker .colorpicker_hex input").val().toUpperCase();
+	d3.xhr('http://ln.raceplace.org/invoice')
+    .header("Content-Type", "application/json")
+    .post(
+        JSON.stringify({index, color}),
+        function(err, rawData){
+            var data = JSON.parse(rawData.response);
+			console.log("invoice response", data);
+			new QRious({
+				element: document.getElementById('qr'),
+				value: data.payment_request,
+				size: 250
+			});
+        }
+    );
+}
