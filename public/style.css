@@ -6,6 +6,11 @@
 	fill: rgba(0,0,0,0.5) !important;
 }
 
+.ordered-list {
+	padding-left: 22px;
+	text-align: left;
+}
+
 #grid svg{
 	cursor: pointer;
 }
