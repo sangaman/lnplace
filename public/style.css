@@ -2,13 +2,6 @@
   	margin:0px;
 }
 
-#invoice{
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 10px;
-}
-
 .square:hover{
 	fill: rgba(0,0,0,0.5) !important;
 }
