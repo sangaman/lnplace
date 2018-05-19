@@ -12,7 +12,9 @@ function gridData() {
 	var click = 0;
 
 	// make get request for colors
-	d3.json("http://ln.raceplace.org/colors", function(error, response) {
+	//var url = "http://ln.raceplace.org/colors";
+	var url = "test.json";
+	d3.json(url, function(error, response) {
     	//console.log(response);
     	rawData = response.colors;
 
@@ -49,6 +51,19 @@ function setGrid(gridData) {
 	// I like to log the data to the console for quick debugging
 	console.log(gridData);
 
+	var copi = cp.colorpicker();
+	d3.select('.colorPicker svg')
+	  	.datum(cp.colorSystems.hsla)
+	  	.call(copi)
+
+	copi.dispatch.on('cpupdate', function(d) {
+	  	var currentColor = cp.converters.dataToHslaString(d);
+	  	var square = grid.selectAll(".square").filter(function(d){
+	  		return selected.x && selected.y && selected.x == d.x && selected.y == d.y;
+	  	});
+	  	square.style('fill',currentColor);
+	});
+
 	var grid = d3.select("#grid")
 		.append("svg")
 		.attr("width","810px")
@@ -69,7 +84,7 @@ function setGrid(gridData) {
 		.attr("height", function(d) { return d.height; })
 		.style("fill", function(d) { return d.color})
 		.style("stroke", "#222")
-		.on('click', function(d) {
+		.on('click', function(d, col, row) {
 	       d.click = !d.click
 	       console.log(arguments)
 
@@ -98,16 +113,3 @@ function setGrid(gridData) {
 gridData();
 
 var selected = {};
-
-var copi = cp.colorpicker();
-d3.select('.colorPicker svg')
-  	.datum(cp.colorSystems.hsla)
-  	.call(copi)
-
-copi.dispatch.on('cpupdate', function(d) {
-  	var currentColor = cp.converters.dataToHslaString(d);
-  	var square = grid.selectAll(".square").filter(function(d){
-  		return selected.x && selected.y && selected.x == d.x && selected.y == d.y;
-  	});
-  	square.style('fill',currentColor);
-});
